@@ -1,9 +1,12 @@
 
 package competition;
 
+import java.io.File;
+
 import competition.operatorinterface.OperatorInterfaceCommandMap;
 import competition.subsystems.SubsystemDefaultCommandMap;
 import xbot.common.command.BaseRobot;
+import xbot.common.command.scripted.ScriptedCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -13,11 +16,33 @@ import xbot.common.command.BaseRobot;
  * directory.
  */
 public class Robot extends BaseRobot {
-
+    ScriptedCommand autoCommand;
+    
 	@Override
 	protected void initializeSystems() {
 		super.initializeSystems();
 		this.injector.getInstance(SubsystemDefaultCommandMap.class);
 		this.injector.getInstance(OperatorInterfaceCommandMap.class);
     }
+	
+	@Override
+    public void autonomousInit() {
+	    autoCommand = new ScriptedCommand(
+                xScheduler,
+                new File("/home/lvuser/scripts/TestAuto.js"),
+                injector.getInstance(AutoCommandFactory.class));
+	    
+	    xScheduler.add(autoCommand);
+	}
+	
+	@Override
+	public void autonomousPeriodic() {
+	    super.autonomousPeriodic();
+	}
+	
+	@Override
+	public void disabledInit() {
+	    if(autoCommand != null)
+	        autoCommand.cancel();
+	}
 }

@@ -20,9 +20,10 @@ public class SubsystemDefaultCommandMap {
 	
    @Inject
     public void setupSensorSubsystem(
-            ValidateIMUSubsystem sensorSubsystem,
-            ValidateIMUCommand command)
+            //ValidateIMUSubsystem sensorSubsystem,
+            //ValidateIMUCommand command
+            )
     {
-       sensorSubsystem.setDefaultCommand(command);
+       //sensorSubsystem.setDefaultCommand(command);
     }
 }

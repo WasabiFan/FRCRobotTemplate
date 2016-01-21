@@ -2,8 +2,7 @@
 package competition;
 
 import java.io.File;
-
-import competition.operatorinterface.OperatorInterfaceCommandMap;
+import competition.operator_interface.OperatorCommandMap;
 import competition.subsystems.SubsystemDefaultCommandMap;
 import xbot.common.command.BaseRobot;
 import xbot.common.command.scripted.ScriptedCommand;
@@ -22,7 +21,7 @@ public class Robot extends BaseRobot {
 	protected void initializeSystems() {
 		super.initializeSystems();
 		this.injector.getInstance(SubsystemDefaultCommandMap.class);
-		this.injector.getInstance(OperatorInterfaceCommandMap.class);
+		this.injector.getInstance(OperatorCommandMap.class);
     }
 	
 	@Override
